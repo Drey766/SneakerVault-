@@ -1,0 +1,73 @@
+.banner {
+  position: relative;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.5)), 
+              url('/images/wooden-background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-color: #8b7355;
+  min-height: 500px;
+  margin: 80px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.overlay {
+  z-index: 1;
+  padding: 40px;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 30px;
+  line-height: 1.2;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.shopButton {
+  display: inline-block;
+  background-color: #fff;
+  color: #000;
+  padding: 14px 40px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 2px solid #fff;
+  transition: all 0.3s ease;
+}
+
+.shopButton:hover {
+  background-color: transparent;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 968px) {
+  .banner {
+    min-height: 400px;
+    margin: 60px 0;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .banner {
+    min-height: 350px;
+    margin: 40px 0;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .overlay {
+    padding: 20px;
+  }
+}
