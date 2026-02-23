@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import ProductCard from '../../components/home/ProductCard';
+import ProductCard from '@/app/components/home/ProductCard';
 import ShopFilters from './ShopFilters';
-import { products } from '../../data/mockData';
-import { useFilters } from '../../context/FilterContext';
+import { products } from '@/app/data/mockData';
+import { useFilters } from '@/app/context/FilterContext';
 import styles from './ShopContent.module.css';
 
 const ShopContent: React.FC = () => {

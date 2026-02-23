@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { useCart } from '../context/CartContext';
+import { useCart } from '@/app/context/CartContext';
 import styles from './Header.module.css';
 
 const Header: React.FC = () => {
@@ -13,15 +13,14 @@ const Header: React.FC = () => {
     <header className={styles.header}>
       <div className={styles.container}>
         <Link href="/" className={styles.logo}>
-          SneakerVault 
+          BOOSY
         </Link>
 
         <nav className={`${styles.nav} ${mobileMenuOpen ? styles.navOpen : ''}`}>
           <Link href="/" onClick={() => setMobileMenuOpen(false)}>Home</Link>
           <Link href="/shop" onClick={() => setMobileMenuOpen(false)}>Shop</Link>
-          <Link href="/products" onClick={() => setMobileMenuOpen(false)}>Products</Link>
+          <Link href="/products" onClick={() => setMobileMenuOpen(false)}>Men's shoes</Link>
           <Link href="/blog" onClick={() => setMobileMenuOpen(false)}>Blog</Link>
-          <Link href="/pages" onClick={() => setMobileMenuOpen(false)}>Pages</Link>
         </nav>
 
         <div className={styles.actions}>

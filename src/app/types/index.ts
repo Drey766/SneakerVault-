@@ -27,4 +27,7 @@ export interface BlogPost {
   image: string;
   date: string;
   slug: string;
+  author?: string;
+  category?: string;
+  content?: string;
 }

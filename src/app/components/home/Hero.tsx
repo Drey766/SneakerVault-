@@ -3,8 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styles from './Hero.module.css';
-import image1 from '@/../public/images/hero/6.png'
-import image2 from '@/../public/images/hero/6.png'
 
 const Hero: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -12,16 +10,16 @@ const Hero: React.FC = () => {
 
   const slides = [
     {
-      title: 'Elevate Your Sneaker Game',
-      subtitle: 'Premium Sneaker Collection',
-      description: ' Discover high-quality sneakers and everyday footwear designed for performance and lifestyle.',
+      title: 'Boot-Inspired Home Accents',
+      subtitle: 'SPECIAL PRICE TODAY',
+      description: 'Crafted boots are at the heart of what we. Our handcrafted boots are high quality.',
       align: 'right',
       backgroundImage: '/images/hero/7.png' // Tan/brown boot with plaid
     },
     {
-      title: 'Step into comfort and style',
-      subtitle: 'New Drop Just Landed',
-      description: 'Designed for comfort. Built for movement. Our sneakers combine performance and street-ready style.',
+      title: 'Minimalist Boot Aesthetics',
+      subtitle: 'SPECIAL PRICE TODAY',
+      description: 'Crafted boots are at the heart of what we do. Our handcrafted boots are high quality.',
       align: 'left',
       backgroundImage: '/images/hero/6.png' // Black glossy boot
     }

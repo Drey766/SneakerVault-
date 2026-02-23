@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useFilters } from '../../context/FilterContext';
+import { useFilters } from '@/app/context/FilterContext';
 import styles from './ShopFilters.module.css';
 
 const ShopFilters: React.FC = () => {

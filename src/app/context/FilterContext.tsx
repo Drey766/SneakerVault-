@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { Product } from '../types';
+import { Product } from '@/app/types';
 
 interface FilterContextType {
   // Category chips

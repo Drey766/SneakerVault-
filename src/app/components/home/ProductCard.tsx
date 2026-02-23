@@ -2,8 +2,8 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Product } from '../../types';
-import { useCart } from '../../context/CartContext';
+import { Product } from '@/app/types';
+import { useCart } from '@/app/context/CartContext';
 import styles from './ProductCard.module.css';
 
 interface ProductCardProps {
@@ -20,7 +20,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   return (
     <div className={styles.card}>
-      <Link href={`/product/${product.id}`} className={styles.imageWrapper}>
+      <Link href={`/product/${product.id}`} className={styles.imageWrapper} prefetch={false}>
         {product.onSale && (
           <span className={styles.saleBadge}>SALE</span>
         )}

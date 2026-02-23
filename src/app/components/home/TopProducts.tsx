@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import ProductCard from './ProductCard';
-import { products } from '../../data/mockData';
+import { products } from '@/app/data/mockData';
 import styles from './TopProducts.module.css';
 
 const TopProducts: React.FC = () => {

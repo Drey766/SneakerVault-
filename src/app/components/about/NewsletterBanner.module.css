@@ -1,0 +1,106 @@
+.banner {
+  position: relative;
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+              url('/images/newsletter-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 100px 20px;
+  background-color: #6b5a4a;
+}
+
+.overlay {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.content {
+  text-align: center;
+  color: #fff;
+}
+
+.iconWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 35px;
+  opacity: 0.95;
+}
+
+.form {
+  display: flex;
+  gap: 12px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.input {
+  flex: 1;
+  padding: 14px 20px;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 4px;
+  font-size: 0.95rem;
+  background-color: rgba(255,255,255,0.15);
+  color: #fff;
+  backdrop-filter: blur(10px);
+}
+
+.input::placeholder {
+  color: rgba(255,255,255,0.7);
+}
+
+.input:focus {
+  outline: none;
+  border-color: rgba(255,255,255,0.6);
+  background-color: rgba(255,255,255,0.2);
+}
+
+.button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 14px 30px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+
+.button:hover {
+  background-color: #333;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+  .banner {
+    padding: 60px 20px;
+  }
+
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .form {
+    flex-direction: column;
+  }
+
+  .button {
+    width: 100%;
+  }
+}

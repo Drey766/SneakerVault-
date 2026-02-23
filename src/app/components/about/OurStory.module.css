@@ -1,0 +1,112 @@
+.section {
+  padding: 80px 0;
+  background-color: #fff;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+.storyBlock {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.reverse {
+  direction: rtl;
+}
+
+.reverse > * {
+  direction: ltr;
+}
+
+.textContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 8px;
+  position: relative;
+  padding-bottom: 16px;
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background-color: #000;
+}
+
+.subtitle {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #999;
+  margin-bottom: 8px;
+}
+
+.description {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: #666;
+}
+
+.imageContent {
+  width: 100%;
+}
+
+.imagePlaceholder {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+  border-radius: 8px;
+}
+
+.storyBlock:nth-child(1) .imagePlaceholder {
+  background: linear-gradient(135deg, #3a3a4a 0%, #2a2a3a 100%);
+}
+
+.storyBlock:nth-child(2) .imagePlaceholder {
+  background: linear-gradient(135deg, #d4c4a8 0%, #b8a890 100%);
+}
+
+@media (max-width: 968px) {
+  .storyBlock {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .reverse {
+    direction: ltr;
+  }
+
+  .container {
+    gap: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 50px 0;
+  }
+
+  .title {
+    font-size: 1.6rem;
+  }
+}

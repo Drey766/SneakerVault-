@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { blogPosts } from '../../data/mockData';
+import { blogPosts } from '@/app/data/mockData';
 import styles from './BlogSection.module.css';
 
 const BlogSection: React.FC = () => {

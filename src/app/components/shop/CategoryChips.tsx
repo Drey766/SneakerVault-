@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useFilters } from '../../context/FilterContext';
+import { useFilters } from '@/app/context/FilterContext';
 import styles from './CategoryChips.module.css';
 
 const CategoryChips: React.FC = () => {

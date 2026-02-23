@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import ProductCard from './ProductCard';
-import { products } from '../../data/mockData';
+import { products } from '@/app/data/mockData';
 import styles from './ProductShowcase.module.css';
 
 const ProductShowcase: React.FC = () => {
@@ -50,7 +50,7 @@ const ProductShowcase: React.FC = () => {
             <div className={styles.bannerImage}>
               <div className={styles.bannerOverlay}>
                 <h3 className={styles.bannerTitle}>SALE UP TO 30% OFF</h3>
-                <button className={styles.bannerButton}>Grab Yours</button>
+                <button className={styles.bannerButton}>SHOP NOW</button>
               </div>
             </div>
           </div>
@@ -59,7 +59,7 @@ const ProductShowcase: React.FC = () => {
           <div className={styles.productsSection}>
             <div className={styles.header}>
               <h2 className={styles.title}>
-                <span className={styles.arrow}>▸</span> Featured Sneakers
+                <span className={styles.arrow}>▸</span> SHOES
               </h2>
               <div className={styles.filters}>
                 {filters.map((filterItem) => (

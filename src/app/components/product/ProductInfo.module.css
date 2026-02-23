@@ -1,0 +1,352 @@
+.info {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Wishlist */
+.wishlist {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ccc;
+  transition: color 0.2s;
+  padding: 4px;
+}
+
+.wishlist:hover {
+  color: #e03131;
+}
+
+/* Name */
+.name {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #111;
+  line-height: 1.2;
+  padding-right: 40px;
+}
+
+/* Stars */
+.ratingRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stars {
+  display: flex;
+  gap: 2px;
+}
+
+.star {
+  font-size: 1.2rem;
+}
+
+.starFilled {
+  color: #f4a116;
+}
+
+.starHalf {
+  color: #f4a116;
+  opacity: 0.6;
+}
+
+.starEmpty {
+  color: #ddd;
+}
+
+.reviewCount {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+/* Price */
+.priceRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.price {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #111;
+}
+
+.originalPrice {
+  font-size: 1.2rem;
+  color: #999;
+  text-decoration: line-through;
+}
+
+.badge {
+  background-color: #2bbc8a;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+/* Color */
+.colorSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.colorLabel {
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.colorSwatches {
+  display: flex;
+  gap: 10px;
+}
+
+.colorSwatch {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.2s;
+  outline-offset: 3px;
+}
+
+.colorSwatch:hover {
+  transform: scale(1.1);
+}
+
+.activeColor {
+  border-color: #555 !important;
+  outline: 2px solid #555;
+}
+
+/* Description */
+.description {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #555;
+  border-top: 1px solid #eee;
+  padding-top: 18px;
+}
+
+/* Quantity */
+.quantityRow {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.quantityControl {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.quantityBtn {
+  background: none;
+  border: none;
+  padding: 0 16px;
+  height: 50px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  color: #333;
+}
+
+.quantityBtn:hover {
+  background-color: #f5f5f5;
+}
+
+.quantityValue {
+  padding: 0 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  min-width: 55px;
+  text-align: center;
+  line-height: 50px;
+}
+
+.addToCart {
+  flex: 1;
+  height: 50px;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.addToCart:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+/* Buy Now */
+.buyNow {
+  width: 100%;
+  height: 50px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.buyNow:hover {
+  background-color: #333;
+}
+
+/* Info Cards */
+.infoCards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 0;
+  border-top: 1px solid #eee;
+}
+
+.infoCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  color: #555;
+}
+
+.infoCard svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: #333;
+}
+
+.infoText {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #555;
+}
+
+/* Shopify Banner */
+.shopifyBanner {
+  border: 1px solid #d0e8a8;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f0f9e0 0%, #e8f5d0 100%);
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.shopifyLeft {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.shopifyLogo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.shopifyText {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.shopifyPromo {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #222;
+  line-height: 1.4;
+}
+
+.shopifySubtext {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.shopifyBtn {
+  background-color: #5a9e2f;
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background-color 0.2s;
+}
+
+.shopifyBtn:hover {
+  background-color: #4a8a28;
+}
+
+.shopifyRight {
+  flex-shrink: 0;
+  width: 80px;
+}
+
+.shopifyBox {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #96bf48 0%, #5e8e3e 100%);
+  border-radius: 8px;
+  position: relative;
+}
+
+.shopifyBox::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #f5c842 0%, #e5a820 100%);
+  border-radius: 4px;
+  transform: rotate(15deg);
+}
+
+@media (max-width: 480px) {
+  .name {
+    font-size: 1.6rem;
+  }
+
+  .quantityRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .quantityControl {
+    justify-content: center;
+  }
+
+  .shopifyBanner {
+    flex-direction: column;
+  }
+
+  .shopifyRight {
+    display: none;
+  }
+}

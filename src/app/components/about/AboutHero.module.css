@@ -1,0 +1,44 @@
+.hero {
+  position: relative;
+  background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)),
+              url('/images/about-hero.jpg');
+  background-size: cover;
+  background-position: center;
+  min-height: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #d4c5b0;
+}
+
+.overlay {
+  text-align: center;
+}
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+  letter-spacing: 2px;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: 280px;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    min-height: 220px;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+}
