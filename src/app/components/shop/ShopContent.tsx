@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import ProductCard from '@/app/components/home/ProductCard';
 import ShopFilters from './ShopFilters';
-import { products } from '@/app/data/mockData';
+import products from '@/app/data/trainers.json';
 import { useFilters } from '@/app/context/FilterContext';
 import styles from './ShopContent.module.css';
 

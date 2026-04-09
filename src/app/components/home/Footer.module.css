@@ -1,0 +1,184 @@
+.footer {
+  background-color: #f8f8f8;
+  padding: 60px 0 30px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.topSection {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 40px;
+  margin-bottom: 50px;
+  padding-bottom: 50px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.columnTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.linkList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.linkList li {
+  margin-bottom: 12px;
+}
+
+.linkList a {
+  color: #666;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.linkList a:hover {
+  color: #000;
+}
+
+.followText,
+.newsletterText {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.socialIcons {
+  display: flex;
+  gap: 15px;
+}
+
+.socialIcons a {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  transition: all 0.3s ease;
+}
+
+.socialIcons a:hover {
+  background-color: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+.newsletterForm {
+  display: flex;
+  gap: 10px;
+}
+
+.emailInput {
+  flex: 1;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.emailInput:focus {
+  outline: none;
+  border-color: #000;
+}
+
+.submitButton {
+  width: 50px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+  background-color: #333;
+}
+
+.bottomSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.paymentMethods {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.paymentIcons {
+  display: flex;
+  gap: 10px;
+}
+
+.paymentIcons span {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.copyright {
+  font-size: 0.85rem;
+  color: #999;
+}
+
+@media (max-width: 1200px) {
+  .topSection {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .topSection {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+
+  .bottomSection {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .topSection {
+    grid-template-columns: 1fr;
+  }
+
+  .footer {
+    padding: 40px 0 20px;
+  }
+}

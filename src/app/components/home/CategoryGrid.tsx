@@ -4,7 +4,6 @@ import React from 'react';
 import Link from 'next/link';
 import { categories } from '@/app/data/mockData';
 import styles from './CategoryGrid.module.css';
-import Image from 'next/image';
 
 const CategoryGrid: React.FC = () => {
   return (
@@ -19,7 +18,7 @@ const CategoryGrid: React.FC = () => {
               className={styles.categoryCard}
             >
               <div className={styles.imageWrapper}>
-                <Image src={category.image} alt={category.name} className={styles.imagePlaceholder} height={935} width={900} />
+                <div className={styles.imagePlaceholder}></div>
               </div>
               <h3 className={styles.categoryName}>{category.name}</h3>
             </Link>

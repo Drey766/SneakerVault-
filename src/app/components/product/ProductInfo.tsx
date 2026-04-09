@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useCart } from '@/app/context/CartContext';
 import styles from './ProductInfo.module.css';
+import { Product } from '@/app/types';
 
 interface Color {
   name: string;
@@ -12,18 +13,17 @@ interface Color {
 interface ProductInfoProps {
   product: {
     id: string;
-    name: string;
-    price: number;
-    originalPrice?: number;
+    title: string;
+    price?: number;
     rating: number;
     reviewCount: number;
     colors: Color[];
-    description: string;
+    brand_description: string;
     deliveryTime: string;
     returnPolicy: string;
     onSale?: boolean;
     category: string;
-    images: string[];
+    hero_image: string[];
   };
 }
 
@@ -48,21 +48,20 @@ const StarRating: React.FC<{ rating: number; count: number }> = ({ rating, count
 };
 
 const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
+  const [selectedColor, setSelectedColor] = useState("Black");
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useCart();
 
-  const discount = product.originalPrice
-    ? Math.round((1 - product.price / product.originalPrice) * 100)
+  const discount = product.price
+    ? Math.round((1 - product.price / product.price) * 100)
     : 0;
 
   const handleAddToCart = () => {
     addToCart({
       id: product.id,
-      name: product.name,
+      name: product.title,
       price: product.price,
-      originalPrice: product.originalPrice,
-      image: product.images[0],
+      image: product.hero_image[0],
       category: product.category,
       quantity,
     } as any);
@@ -78,16 +77,15 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
       </button>
 
       {/* Name */}
-      <h1 className={styles.name}>{product.name}</h1>
+      <h1 className={styles.name}>{product.title}</h1>
 
       {/* Rating */}
       <StarRating rating={product.rating} count={product.reviewCount} />
 
       {/* Price */}
       <div className={styles.priceRow}>
-        <span className={styles.price}>${product.price.toFixed(2)}</span>
-        {product.originalPrice && (
-          <span className={styles.originalPrice}>${product.originalPrice.toFixed(2)}</span>
+        {product.price && (
+          <span className={styles.price}>${product.price.toFixed(2)}</span>
         )}
         {discount > 0 && (
           <span className={styles.badge}>SAVE {discount}%</span>
@@ -95,24 +93,10 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
       </div>
 
       {/* Color Selector */}
-      <div className={styles.colorSection}>
-        <p className={styles.colorLabel}>Color: <strong>{selectedColor.name}</strong></p>
-        <div className={styles.colorSwatches}>
-          {product.colors.map((color) => (
-            <button
-              key={color.name}
-              className={`${styles.colorSwatch} ${selectedColor.name === color.name ? styles.activeColor : ''}`}
-              style={{ backgroundColor: color.hex }}
-              onClick={() => setSelectedColor(color)}
-              aria-label={`Color: ${color.name}`}
-              title={color.name}
-            />
-          ))}
-        </div>
-      </div>
+      
 
       {/* Description */}
-      <p className={styles.description}>{product.description}</p>
+      <p className={styles.description}>{product.brand_description}</p>
 
       {/* Quantity + Add to Cart */}
       <div className={styles.quantityRow}>
@@ -177,9 +161,9 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
             <span className={styles.shopifyText}>shopify</span>
           </div>
           <p className={styles.shopifyPromo}>
-            Enjoy a free 3-day trial. Then start selling for $1/month for your first 3 months.
+            Enjoy a free 30% discount if it's your first purchase. Then get free pair of air maax jrdan 1's if it your 500th customer.
           </p>
-          <p className={styles.shopifySubtext}>Explore, build, and bring your business to life at your own pace.</p>
+          <p className={styles.shopifySubtext}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus vero nostrum, cum pariatur quis blanditiis totam tempora illum ea obcaecati eveniet reprehenderit quidem id, deleniti odio adipisci alias tenetur asperiores.</p>
           <button className={styles.shopifyBtn}>Sign Up Now</button>
         </div>
         <div className={styles.shopifyRight}>

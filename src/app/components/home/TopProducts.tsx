@@ -2,18 +2,18 @@
 
 import React, { useState, useEffect } from 'react';
 import ProductCard from './ProductCard';
-import { products } from '@/app/data/mockData';
+import products  from '@/app/data/trainers.json';
 import styles from './TopProducts.module.css';
 
 const TopProducts: React.FC = () => {
-  const [filter, setFilter] = useState('Top Rating');
-  const [displayedProducts, setDisplayedProducts] = useState(products.filter(p => p.category === 'toprating').slice(0, 4));
+  const [filter, setFilter] = useState('Adidas Performance');
+  const [displayedProducts, setDisplayedProducts] = useState(products.filter(p => p.brand === 'toprating').slice(0, 4));
   const [isAnimating, setIsAnimating] = useState(false);
 
   const filters = [
-    { name: 'Combat Boots', category: 'combat' },
-    { name: 'Best Seller', category: 'bestseller' },
-    { name: 'Top Rating', category: 'toprating' }
+    { name: 'Adidas Performance', brand: 'adidas performance' },
+    { name: 'Jack & Jones', brand: 'Jack & Jones' },
+    { name: 'New balance', brand: 'New Balance' }
   ];
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const TopProducts: React.FC = () => {
     // Wait for fade out, then update products
     const timeout = setTimeout(() => {
       const currentFilter = filters.find(f => f.name === filter);
-      const filteredProducts = products.filter(p => p.category === currentFilter?.category).slice(0, 4);
+      const filteredProducts = products.filter(p => p.brand === currentFilter?.brand).slice(0, 4);
       setDisplayedProducts(filteredProducts);
       
       // Trigger fade in

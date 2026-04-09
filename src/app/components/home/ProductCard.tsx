@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Product } from '@/app/types';
 import { useCart } from '@/app/context/CartContext';
 import styles from './ProductCard.module.css';
+import Image from 'next/image';
 
 interface ProductCardProps {
   product: Product;
@@ -20,14 +21,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   return (
     <div className={styles.card}>
-      <Link href={`/product/${product.id}`} className={styles.imageWrapper} prefetch={false}>
-        {product.onSale && (
+      <Link href={`/product/${product.id}`} className={styles.imageWrapper}>
+        {product.selling_fast && (
           <span className={styles.saleBadge}>SALE</span>
         )}
-        {product.isNew && (
+        {product.has_more_colours && (
           <span className={styles.newBadge}>NEW</span>
         )}
-        <div className={styles.imagePlaceholder}></div>
+        <div className={styles.imagePlaceholder}>
+          <Image src={product.hero_image.split("?")[0]} alt={product.title} layout="fill" objectFit="cover" />
+        </div>
         <div className={styles.overlay}>
           <button onClick={handleAddToCart} className={styles.addToCartBtn}>
             ADD TO CART
@@ -37,13 +40,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       
       <div className={styles.info}>
         <Link href={`/product/${product.id}`}>
-          <h3 className={styles.name}>{product.name}</h3>
+          <h3 className={styles.name}>{product.title}</h3>
         </Link>
         <div className={styles.priceWrapper}>
           <span className={styles.price}>${product.price.toFixed(2)}</span>
-          {product.originalPrice && (
+          {product.price && (
             <span className={styles.originalPrice}>
-              ${product.originalPrice.toFixed(2)}
+              ${product.price.toFixed(2)}
             </span>
           )}
         </div>

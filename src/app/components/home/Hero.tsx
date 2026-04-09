@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styles from './Hero.module.css';
+import heroImg1 from '../../../../public/images/hero/7.png'
+import heroImg2 from '../../../../public/images/hero/6.png'
 
 const Hero: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -14,14 +16,14 @@ const Hero: React.FC = () => {
       subtitle: 'SPECIAL PRICE TODAY',
       description: 'Crafted boots are at the heart of what we. Our handcrafted boots are high quality.',
       align: 'right',
-      backgroundImage: '/images/hero/7.png' // Tan/brown boot with plaid
+      backgroundImage: heroImg1.src
     },
     {
       title: 'Minimalist Boot Aesthetics',
       subtitle: 'SPECIAL PRICE TODAY',
       description: 'Crafted boots are at the heart of what we do. Our handcrafted boots are high quality.',
       align: 'left',
-      backgroundImage: '/images/hero/6.png' // Black glossy boot
+      backgroundImage: heroImg2.src // Black glossy boot
     }
   ];
 
