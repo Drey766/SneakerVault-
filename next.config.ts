@@ -4,7 +4,12 @@ const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
   images: {
-    domains: ["images.asos-media.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.asos-media.com",
+      },
+    ],
   },
 };
 
