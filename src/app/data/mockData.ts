@@ -55,10 +55,10 @@ export const getProductById = (id: string): Product | undefined => {
 
 // Categories based on actual product data
 export const categories: Category[] = [
-  { id: 'running', name: 'Running Shoes', image: '/images/category-running.jpg', count: products.filter(p => p.category === 'RUNNING').length },
-  { id: 'casual', name: 'Casual Footwear', image: '/images/category-casual.jpg', count: products.filter(p => p.category === 'CASUAL').length },
-  { id: 'formal', name: 'Formal Shoes', image: '/images/category-formal.jpg', count: products.filter(p => p.category === 'FORMAL').length },
-  { id: 'football', name: 'Football Cleats', image: '/images/category-football.jpg', count: products.filter(p => p.category === 'FOOTBALL').length },
+  { id: 'running', name: 'Running Shoes', image: '/images/home/ba159-1.jpg', count: products.filter(p => p.category === 'RUNNING').length },
+  { id: 'casual', name: 'Casual Footwear', image: '/images/home/ba159-2.jpg', count: products.filter(p => p.category === 'CASUAL').length },
+  { id: 'formal', name: 'Formal Shoes', image: '/images/home/ba159-3.jpg', count: products.filter(p => p.category === 'FORMAL').length },
+  { id: 'football', name: 'Football Cleats', image: '/images/home/ba159-4.jpg', count: products.filter(p => p.category === 'FOOTBALL').length },
 ];
 
 // Blog posts

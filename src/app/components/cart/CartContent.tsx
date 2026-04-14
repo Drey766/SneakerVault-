@@ -60,13 +60,15 @@ const CartContent: React.FC = () => {
               <div key={item.id} className={styles.cartItem}>
                 <div className={styles.itemProduct}>
                   <Link href={`/product/${item.id}`} className={styles.itemImage}>
-                    <div className={styles.imagePlaceholder}></div>
+                    <div className={styles.imagePlaceholder}>
+                      <img src={item.hero_image.split("?")[0]} alt={item.title} />
+                    </div>
                   </Link>
                   <div className={styles.itemInfo}>
                     <Link href={`/product/${item.id}`}>
-                      <h3 className={styles.itemName}>{item.name}</h3>
+                      <h3 className={styles.itemName}>{item.title}</h3>
                     </Link>
-                    <p className={styles.itemCategory}>{item.category}</p>
+                    <p className={styles.itemCategory}>{item.brand}</p>
                     <button
                       className={styles.removeBtn}
                       onClick={() => removeFromCart(item.id)}
@@ -78,9 +80,9 @@ const CartContent: React.FC = () => {
 
                 <div className={styles.itemPrice}>
                   ${item.price.toFixed(2)}
-                  {item.originalPrice && (
+                  {item.price && (
                     <span className={styles.itemOriginal}>
-                      ${item.originalPrice.toFixed(2)}
+                      ${(item.price + 26).toFixed(2)}
                     </span>
                   )}
                 </div>

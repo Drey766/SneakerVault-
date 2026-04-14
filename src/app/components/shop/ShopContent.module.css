@@ -1,6 +1,7 @@
 .section {
   padding: 60px 0;
   background-color: #fff;
+  width: 100%;
 }
 
 .container {
@@ -43,6 +44,7 @@
 }
 
 .content {
+  width: 100%;
   flex: 1;
 }
 
@@ -106,6 +108,9 @@
   align-items: center;
   gap: 10px;
   margin-top: 40px;
+  width: 100%;
+  max-width: 1000px;
+  overflow: scroll;
 }
 
 .pageBtn {
@@ -141,6 +146,7 @@
   font-weight: 500;
   min-width: 45px;
   transition: all 0.3s ease;
+  
 }
 
 .pageNumber:hover {

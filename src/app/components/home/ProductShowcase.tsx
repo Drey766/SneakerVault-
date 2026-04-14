@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import ProductCard from './ProductCard';
-import products  from '@/app/data/trainers.json';
+import products  from '@/app/data/shoes_cleaned.json';
 import styles from './ProductShowcase.module.css';
+import Link from 'next/link';
 
 const ProductShowcase: React.FC = () => {
   const [filter, setFilter] = useState('BOSS Orange');
@@ -50,7 +51,9 @@ const ProductShowcase: React.FC = () => {
             <div className={styles.bannerImage}>
               <div className={styles.bannerOverlay}>
                 <h3 className={styles.bannerTitle}>SALE UP TO 30% OFF</h3>
-                <button className={styles.bannerButton}>SHOP NOW</button>
+                <Link href="/shop" className={styles.bannerButton}>
+                  SHOP NOW
+                </Link>
               </div>
             </div>
           </div>
