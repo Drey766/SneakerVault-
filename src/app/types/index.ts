@@ -1,26 +1,26 @@
 export interface Product {
-  id: string;
-  url: string;
-  title: string;
-  brand?: string;
-  color?: string;
-  gender?: string;
-  price: number;
-  original_price?: number;
-  discount_pct?: number;
-  on_sale?: boolean;
-  selling_fast?: boolean;
-  has_more_colours?: boolean;
-  saves?: number;
-  shipping_restrictions?: boolean;
-  delivery_info?: string;
-  rating?: number;
-  rating_count?: number;
+  id: string | null;
+  url: string | null;
+  title: string | null;
+  brand?: string | null;
+  color?: string | null;
+  gender?: string | null;
+  price: number | null;
+  original_price?: number | null;
+  discount_pct?: number | null;
+  on_sale?: boolean | null;
+  selling_fast?: boolean | null;
+  has_more_colours?: boolean | null;
+  saves?: string | null;
+  shipping_restrictions?: boolean | null;
+  delivery_info?: string | null;
+  rating?: number | null;
+  rating_count?: number | null;
   features?: string[];
-  materials?: string;
-  care_instructions?: string;
-  brand_description?: string;
-  hero_image: string;
+  materials?: string | null;
+  care_instructions?: string | null;
+  brand_description?: string | null;
+  hero_image: string | null;
   gallery_images: string[];
 }
 
