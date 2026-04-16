@@ -2,15 +2,16 @@
 
 import React, { useState } from 'react';
 import styles from './ProductTabs.module.css';
+import { Product } from '@/app/types';
 
 interface ProductTabsProps {
   product: {
-    name: string;
-    description: string;
+    title: string;
+    brand_description: string;
   };
 }
 
-const ProductTabs: React.FC<ProductTabsProps> = ({ product }) => {
+const ProductTabs: React.FC = ({}) => {
   const [activeTab, setActiveTab] = useState('description');
 
   const tabs = [

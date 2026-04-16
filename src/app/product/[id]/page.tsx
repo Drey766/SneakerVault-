@@ -25,10 +25,10 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
           <Breadcrumb productName={productData.title} />
           <div className={styles.productLayout}>
             <ProductGallery images={productData.gallery_images} />
-            <ProductInfo product={productData} />
+            <ProductInfo title={productData.title} rating={productData.rating} rating_count={productData.rating_count} brand_description={productData.brand_description} delivery_info={productData.delivery_info} price={productData.price} on_sale={productData.on_sale} brand={productData.brand} hero_image={productData.hero_image} id={productData.id} />
           </div>
         </div>
-        <ProductTabs product={productData} />
+        <ProductTabs />
         <ProductFeatures />
         <YouMightAlsoLike />
       </div>

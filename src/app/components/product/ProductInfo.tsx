@@ -11,20 +11,16 @@ interface Color {
 }
 
 interface ProductInfoProps {
-  product: {
-    id: string;
-    title: string;
-    price?: number;
-    rating: number;
-    reviewCount: number;
-    colors: Color[];
-    brand_description: string;
-    deliveryTime: string;
-    returnPolicy: string;
-    onSale?: boolean;
-    category: string;
-    hero_image: string[];
-  };
+  id: string;
+  title: string;
+  rating?: number | null;
+  rating_count?: number | null;
+  brand_description?: string | null;
+  delivery_info?: string | null;
+  price: number | null;
+  on_sale?: boolean | null;
+  brand?: string | null;
+  hero_image: string | null;
 }
 
 const StarRating: React.FC<{ rating: number; count: number }> = ({ rating, count }) => {
@@ -47,22 +43,22 @@ const StarRating: React.FC<{ rating: number; count: number }> = ({ rating, count
   );
 };
 
-const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
+const ProductInfo: React.FC<ProductInfoProps> = ({ title, rating, rating_count, brand_description, delivery_info, price, on_sale, brand, hero_image, id }) => {
   const [selectedColor, setSelectedColor] = useState("Black");
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useCart();
 
-  const discount = product.price
-    ? Math.round((1 - product.price / product.price) * 100)
+  const discount = price
+    ? Math.round((1 - price / price) * 100)
     : 0;
 
   const handleAddToCart = () => {
     addToCart({
-      id: product.id,
-      name: product.title,
-      price: product.price,
-      image: product.hero_image[0],
-      category: product.category,
+      id: id,
+      name: title,
+      price: price,
+      image: hero_image,
+      category: brand,
       quantity,
     } as any);
   };
@@ -77,15 +73,15 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
       </button>
 
       {/* Name */}
-      <h1 className={styles.name}>{product.title}</h1>
+      <h1 className={styles.name}>{title}</h1>
 
       {/* Rating */}
-      <StarRating rating={product.rating} count={product.reviewCount} />
+      <StarRating rating={rating || 0} count={rating_count || 0} />
 
       {/* Price */}
       <div className={styles.priceRow}>
-        {product.price && (
-          <span className={styles.price}>${product.price.toFixed(2)}</span>
+        {price && (
+          <span className={styles.price}>${price.toFixed(2)}</span>
         )}
         {discount > 0 && (
           <span className={styles.badge}>SAVE {discount}%</span>
@@ -96,7 +92,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
       
 
       {/* Description */}
-      <p className={styles.description}>{product.brand_description}</p>
+      <p className={styles.description}>{brand_description}</p>
 
       {/* Quantity + Add to Cart */}
       <div className={styles.quantityRow}>
@@ -132,7 +128,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
           </svg>
           <div>
             <p className={styles.infoText}>
-              Estimate delivery times: <strong>{product.deliveryTime}</strong>
+              <strong>{delivery_info}</strong>
             </p>
           </div>
         </div>
@@ -144,7 +140,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
           </svg>
           <div>
             <p className={styles.infoText}>
-              Return within <strong>{product.returnPolicy}</strong>
+              Return within <strong>45 days</strong>
             </p>
           </div>
         </div>

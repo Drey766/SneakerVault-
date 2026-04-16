@@ -61,7 +61,7 @@ const CartContent: React.FC = () => {
                 <div className={styles.itemProduct}>
                   <Link href={`/product/${item.id}`} className={styles.itemImage}>
                     <div className={styles.imagePlaceholder}>
-                      <img src={item.hero_image.split("?")[0]} alt={item.title} />
+                      <img src={item.hero_image ? item.hero_image.split("?")[0] : ''} alt={item.title || 'Product image'} />
                     </div>
                   </Link>
                   <div className={styles.itemInfo}>
@@ -71,7 +71,7 @@ const CartContent: React.FC = () => {
                     <p className={styles.itemCategory}>{item.brand}</p>
                     <button
                       className={styles.removeBtn}
-                      onClick={() => removeFromCart(item.id)}
+                      onClick={() => item.id && removeFromCart(item.id)}
                     >
                       Remove
                     </button>
@@ -79,7 +79,7 @@ const CartContent: React.FC = () => {
                 </div>
 
                 <div className={styles.itemPrice}>
-                  ${item.price.toFixed(2)}
+                  ${item.price ? item.price.toFixed(2) : '0.00'}
                   {item.price && (
                     <span className={styles.itemOriginal}>
                       ${(item.price + 26).toFixed(2)}
@@ -108,7 +108,7 @@ const CartContent: React.FC = () => {
                 </div>
 
                 <div className={styles.itemTotal}>
-                  ${(item.price * item.quantity).toFixed(2)}
+                  ${(item.price ? item.price * item.quantity : 0).toFixed(2)}
                 </div>
               </div>
             ))}

@@ -159,14 +159,14 @@ export function FilterProvider({ children }: { children: ReactNode }) {
 
     // Filter by price
     filtered = filtered.filter(
-      product => product.price >= priceMin && product.price <= priceMax
+      product => product.price || 0 >= priceMin && product.price || 0 <= priceMax
     );
 
     // Filter by availability
     if (inStock && !outOfStock) {
-      filtered = filtered.filter(product => !product.isNew); // Mock: assume new items are in stock
+      filtered = filtered.filter(product => !product.selling_fast); // Mock: assume new items are in stock
     } else if (outOfStock && !inStock) {
-      filtered = filtered.filter(product => product.isNew); // Mock logic
+      filtered = filtered.filter(product => product.selling_fast); // Mock logic
     }
 
     // Filter by brands
@@ -178,7 +178,7 @@ export function FilterProvider({ children }: { children: ReactNode }) {
     // Filter by categories (from sidebar)
     if (selectedCategories.length > 0) {
       filtered = filtered.filter(product => 
-        selectedCategories.some(cat => product.category.toLowerCase().includes(cat.toLowerCase()))
+        selectedCategories.some(cat => product.brand?.toLowerCase().includes(cat.toLowerCase()))
       );
     }
 
@@ -196,7 +196,7 @@ export function FilterProvider({ children }: { children: ReactNode }) {
       const allowedCategories = activeCategories.flatMap(cat => categoryMap[cat] || []);
       if (allowedCategories.length > 0) {
         filtered = filtered.filter(product => 
-          allowedCategories.includes(product.category)
+          allowedCategories.includes(product.brand || '')
         );
       }
     }
@@ -205,7 +205,7 @@ export function FilterProvider({ children }: { children: ReactNode }) {
     if (selectedProductTypes.length > 0) {
       filtered = filtered.filter(product =>
         selectedProductTypes.some(type => 
-          product.name.toLowerCase().includes(type.toLowerCase())
+          product.title?.toLowerCase().includes(type.toLowerCase())
         )
       );
     }

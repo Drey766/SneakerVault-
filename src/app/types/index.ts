@@ -1,7 +1,7 @@
 export interface Product {
-  id: string | null;
+  id: string;
   url: string | null;
-  title: string | null;
+  title: string;
   brand?: string | null;
   color?: string | null;
   gender?: string | null;

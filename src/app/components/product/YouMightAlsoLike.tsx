@@ -3,8 +3,9 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useCart } from '@/app/context/CartContext';
-import { products } from '@/app/data/mockData';
+import products from '@/app/data/shoes_cleaned.json';
 import styles from './YouMightAlsoLike.module.css';
+import Image from 'next/image';
 
 const YouMightAlsoLike: React.FC = () => {
   const { addToCart } = useCart();
@@ -22,8 +23,8 @@ const YouMightAlsoLike: React.FC = () => {
           {visible.map((product) => (
             <div key={product.id} className={styles.card}>
               <Link href={`/product/${product.id}`} className={styles.imageWrapper}>
-                {product.onSale && <span className={styles.saleBadge}>Sale</span>}
-                <div className={styles.imagePlaceholder} />
+                {product.on_sale && <span className={styles.saleBadge}>Sale</span>}
+                <Image className={styles.imagePlaceholder} src={product.hero_image} alt={product.title} width={524} height={669} />
                 <div className={styles.overlay}>
                   <button
                     className={styles.addBtn}
@@ -35,12 +36,12 @@ const YouMightAlsoLike: React.FC = () => {
               </Link>
               <div className={styles.cardInfo}>
                 <Link href={`/product/${product.id}`}>
-                  <h3 className={styles.name}>{product.name}</h3>
+                  <h3 className={styles.name}>{product.title}</h3>
                 </Link>
                 <div className={styles.prices}>
                   <span className={styles.price}>${product.price.toFixed(2)}</span>
-                  {product.originalPrice && (
-                    <span className={styles.original}>${product.originalPrice.toFixed(2)}</span>
+                  {product.price && (
+                    <span className={styles.original}>${product.price.toFixed(2)}</span>
                   )}
                 </div>
               </div>

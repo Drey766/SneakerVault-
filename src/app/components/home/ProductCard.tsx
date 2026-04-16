@@ -29,7 +29,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <span className={styles.newBadge}>NEW</span>
         )}
         <div className={styles.imagePlaceholder}>
-          <Image src={product.hero_image.split("?")[0]} alt={product.title} layout="fill" objectFit="cover" />
+          {product.hero_image && (
+            <Image src={product.hero_image.split("?")[0]} alt={product.title || 'Product image'} layout="fill" objectFit="cover" />
+          )}
         </div>
         <div className={styles.overlay}>
           <button onClick={handleAddToCart} className={styles.addToCartBtn}>
@@ -43,7 +45,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <h3 className={styles.name}>{product.title}</h3>
         </Link>
         <div className={styles.priceWrapper}>
-          <span className={styles.price}>${product.price.toFixed(2)}</span>
+          {product.price && (
+            <span className={styles.price}>${product.price.toFixed(2)}</span>
+          )}
           {product.price && (
             <span className={styles.originalPrice}>
               ${product.price.toFixed(2)}
