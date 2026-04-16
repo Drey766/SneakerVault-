@@ -8,7 +8,7 @@ const FeatureBanner: React.FC = () => {
   return (
     <section className={styles.banner}>
       <div className={styles.overlay}>
-        <h2 className={styles.title}>Handcrafted Boot Storage</h2>
+        <h2 className={styles.title}>Handcrafted Sneakers Storage</h2>
         <Link href="/shop" className={styles.shopButton}>
           SHOP NOW
         </Link>

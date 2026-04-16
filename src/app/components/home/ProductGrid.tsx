@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import ProductCard from './ProductCard';
-import { products } from '@/app/data/mockData';
+import products from '@/app/data/shoes_cleaned.json';
 import styles from './ProductGrid.module.css';
 
 const ProductGrid: React.FC = () => {
