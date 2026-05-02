@@ -4,30 +4,58 @@ import React from 'react';
 import { useFilters } from '@/app/context/FilterContext';
 import styles from './CategoryChips.module.css';
 
+// Quick-filter chips backed by real dataset fields in FilterContext.
+// Each chip maps to one or more boolean/string filter toggles.
 const CategoryChips: React.FC = () => {
-  const { activeCategories, toggleCategory } = useFilters();
-
-  const categories = [
-    { id: '1', name: 'Athletic Footwear', count: 16 },
-    { id: '2', name: 'Boots for Every Occasion', count: 17 },
-    { id: '3', name: 'Luxury Leather Shoes', count: 15 },
-    { id: '4', name: 'Sandals & Slides', count: 19 },
-    { id: '5', name: 'Sneakerhead\'s Haven', count: 13 }
-  ];
+  const {
+    selectedGenders,
+    toggleGender,
+    onSale,
+    setOnSale,
+    sellingFast,
+    setSellingFast,
+    hasMoreColours,
+    setHasMoreColours,
+  } = useFilters();
 
   return (
     <section className={styles.section}>
       <div className={styles.container}>
         <div className={styles.chips}>
-          {categories.map((category) => (
+
+          {/* Gender chips */}
+          {(['Men', 'Women'] as const).map(gender => (
             <button
-              key={category.id}
-              className={`${styles.chip} ${activeCategories.includes(category.name) ? styles.active : ''}`}
-              onClick={() => toggleCategory(category.name)}
+              key={gender}
+              className={`${styles.chip} ${selectedGenders.includes(gender) ? styles.active : ''}`}
+              onClick={() => toggleGender(gender)}
             >
-              {category.name} ({category.count})
+              {gender}
             </button>
           ))}
+
+          {/* Availability quick-filters */}
+          <button
+            className={`${styles.chip} ${onSale ? styles.active : ''}`}
+            onClick={() => setOnSale(!onSale)}
+          >
+            On Sale
+          </button>
+
+          <button
+            className={`${styles.chip} ${sellingFast ? styles.active : ''}`}
+            onClick={() => setSellingFast(!sellingFast)}
+          >
+            Selling Fast
+          </button>
+
+          <button
+            className={`${styles.chip} ${hasMoreColours ? styles.active : ''}`}
+            onClick={() => setHasMoreColours(!hasMoreColours)}
+          >
+            More Colours Available
+          </button>
+
         </div>
       </div>
     </section>

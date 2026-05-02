@@ -203,3 +203,49 @@
     grid-template-columns: repeat(8, 1fr);
   }
 }
+
+/* ── Price range labels ──────────────────────────────────────── */
+.priceRangeLabels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 6px;
+}
+
+/* ── Selected colour tags (below swatches) ───────────────────── */
+.colorLegend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+  min-height: 0;
+}
+
+.colorTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 3px 10px 3px 12px;
+  font-size: 0.8rem;
+  color: #333;
+}
+
+.colorTag button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  color: #666;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.colorTag button:hover {
+  color: #000;
+}

@@ -154,7 +154,7 @@
 
 @media (max-width: 480px) {
   .logo {
-    font-size: 1.4rem;
+    font-size: .8rem;
   }
   
   .icons {
@@ -163,6 +163,11 @@
   
   .iconButton,
   .cartButton {
-    padding: 5px;
+    padding: 2px;
   }
+
+  .iconButton > svg,
+  .cartButton > svg {
+    width: 15px !important;
+    height: 15px !important;
 }

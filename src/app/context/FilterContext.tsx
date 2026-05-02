@@ -1,264 +1,219 @@
 'use client';
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useCallback, useMemo, ReactNode } from 'react';
 import { Product } from '@/app/types';
 
+// ─── Color normalizer (mirrors ShopFilters colour families) ──────────────────
+
+function normalizeColor(raw: string | null | undefined): string | null {
+  if (!raw) return null;
+  const c = raw.toUpperCase();
+  if (c.includes('BLACK')) return 'Black';
+  if (c.includes('WHITE') || c.includes('IVORY') || c.includes('CREAM')) return 'White';
+  if (c.includes('BROWN') || c.includes('TAN') || c.includes('CARAMEL') || c.includes('CHOCOLATE') || c.includes('COGNAC')) return 'Brown';
+  if (c.includes('BEIGE') || c.includes('NUDE') || c.includes('STONE') || c.includes('SAND') || c.includes('NATURAL')) return 'Beige';
+  if (c.includes('NAVY')) return 'Navy';
+  if (c.includes('BLUE') || c.includes('TEAL') || c.includes('COBALT') || c.includes('INDIGO') || c.includes('DENIM')) return 'Blue';
+  if (c.includes('RED') || c.includes('CRIMSON') || c.includes('SCARLET') || c.includes('CHERRY')) return 'Red';
+  if (c.includes('GREEN') || c.includes('OLIVE') || c.includes('KHAKI') || c.includes('MINT') || c.includes('SAGE')) return 'Green';
+  if (c.includes('GREY') || c.includes('GRAY') || c.includes('SILVER')) return 'Grey';
+  if (c.includes('PINK') || c.includes('ROSE') || c.includes('BLUSH') || c.includes('MAUVE')) return 'Pink';
+  if (c.includes('PURPLE') || c.includes('LILAC') || c.includes('VIOLET') || c.includes('PLUM') || c.includes('LAVENDER')) return 'Purple';
+  if (c.includes('YELLOW') || c.includes('GOLD') || c.includes('LEMON')) return 'Yellow';
+  if (c.includes('ORANGE') || c.includes('CORAL') || c.includes('RUST') || c.includes('TERRACOTTA')) return 'Orange';
+  if (c.includes('MAROON') || c.includes('BURGUNDY') || c.includes('WINE') || c.includes('OXBLOOD')) return 'Burgundy';
+  if (c.includes('MULTI')) return 'Multi';
+  return null;
+}
+
+// ─── Context type ─────────────────────────────────────────────────────────────
+
 interface FilterContextType {
-  // Category chips
-  activeCategories: string[];
-  toggleCategory: (category: string) => void;
-  
-  // Availability
-  inStock: boolean;
-  outOfStock: boolean;
-  setInStock: (value: boolean) => void;
-  setOutOfStock: (value: boolean) => void;
-  
+  // Gender
+  selectedGenders: string[];
+  toggleGender: (gender: string) => void;
+
+  // Availability flags (real fields from dataset)
+  onSale: boolean;
+  setOnSale: (value: boolean) => void;
+  sellingFast: boolean;
+  setSellingFast: (value: boolean) => void;
+  hasMoreColours: boolean;
+  setHasMoreColours: (value: boolean) => void;
+  freeDelivery: boolean;
+  setFreeDelivery: (value: boolean) => void;
+
   // Price
   priceMin: number;
   priceMax: number;
   setPriceMin: (value: number) => void;
   setPriceMax: (value: number) => void;
-  
+
   // Brand
   selectedBrands: string[];
   toggleBrand: (brand: string) => void;
-  
-  // Category filters
-  selectedCategories: string[];
-  toggleCategoryFilter: (category: string) => void;
-  
+
   // Color
   selectedColors: string[];
   toggleColor: (color: string) => void;
-  
-  // Material
-  selectedMaterials: string[];
-  toggleMaterial: (material: string) => void;
-  
-  // More Filters
-  selectedMoreFilters: string[];
-  toggleMoreFilter: (filter: string) => void;
-  
-  // Size
-  selectedSizes: string[];
-  toggleSize: (size: string) => void;
-  
-  // Product Type
-  selectedProductTypes: string[];
-  toggleProductType: (type: string) => void;
-  
+
   // Filter products
   filterProducts: (products: Product[]) => Product[];
-  
+
   // Clear all filters
   clearAllFilters: () => void;
 }
 
+// ─── Context ──────────────────────────────────────────────────────────────────
+
 const FilterContext = createContext<FilterContextType | undefined>(undefined);
 
+const DEFAULT_PRICE_MAX = 400; // dataset ceiling: $387
+
 export function FilterProvider({ children }: { children: ReactNode }) {
-  // Category chips
-  const [activeCategories, setActiveCategories] = useState<string[]>([]);
-  
+  // Gender
+  const [selectedGenders, setSelectedGenders] = useState<string[]>([]);
+
   // Availability
-  const [inStock, setInStock] = useState(false);
-  const [outOfStock, setOutOfStock] = useState(false);
-  
+  const [onSale, setOnSale] = useState(false);
+  const [sellingFast, setSellingFast] = useState(false);
+  const [hasMoreColours, setHasMoreColours] = useState(false);
+  const [freeDelivery, setFreeDelivery] = useState(false);
+
   // Price
   const [priceMin, setPriceMin] = useState(0);
-  const [priceMax, setPriceMax] = useState(500);
-  
+  const [priceMax, setPriceMax] = useState(DEFAULT_PRICE_MAX);
+
   // Brand
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
-  
-  // Category
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  
+
   // Color
   const [selectedColors, setSelectedColors] = useState<string[]>([]);
-  
-  // Material
-  const [selectedMaterials, setSelectedMaterials] = useState<string[]>([]);
-  
-  // More Filters
-  const [selectedMoreFilters, setSelectedMoreFilters] = useState<string[]>([]);
-  
-  // Size
-  const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
-  
-  // Product Type
-  const [selectedProductTypes, setSelectedProductTypes] = useState<string[]>([]);
 
-  const toggleCategory = (category: string) => {
-    setActiveCategories(prev =>
-      prev.includes(category)
-        ? prev.filter(c => c !== category)
-        : [...prev, category]
+  // ── Togglers (stable references via useCallback) ────────────────────────────
+
+  const toggleGender = useCallback((gender: string) => {
+    setSelectedGenders(prev =>
+      prev.includes(gender) ? prev.filter(g => g !== gender) : [...prev, gender]
     );
-  };
+  }, []);
 
-  const toggleBrand = (brand: string) => {
+  const toggleBrand = useCallback((brand: string) => {
     setSelectedBrands(prev =>
-      prev.includes(brand)
-        ? prev.filter(b => b !== brand)
-        : [...prev, brand]
+      prev.includes(brand) ? prev.filter(b => b !== brand) : [...prev, brand]
     );
-  };
+  }, []);
 
-  const toggleCategoryFilter = (category: string) => {
-    setSelectedCategories(prev =>
-      prev.includes(category)
-        ? prev.filter(c => c !== category)
-        : [...prev, category]
-    );
-  };
-
-  const toggleColor = (color: string) => {
+  const toggleColor = useCallback((color: string) => {
     setSelectedColors(prev =>
-      prev.includes(color)
-        ? prev.filter(c => c !== color)
-        : [...prev, color]
+      prev.includes(color) ? prev.filter(c => c !== color) : [...prev, color]
     );
-  };
+  }, []);
 
-  const toggleMaterial = (material: string) => {
-    setSelectedMaterials(prev =>
-      prev.includes(material)
-        ? prev.filter(m => m !== material)
-        : [...prev, material]
-    );
-  };
+  // ── Filter logic (stable reference — only recreated when filter state changes) ──
 
-  const toggleMoreFilter = (filter: string) => {
-    setSelectedMoreFilters(prev =>
-      prev.includes(filter)
-        ? prev.filter(f => f !== filter)
-        : [...prev, filter]
-    );
-  };
-
-  const toggleSize = (size: string) => {
-    setSelectedSizes(prev =>
-      prev.includes(size)
-        ? prev.filter(s => s !== size)
-        : [...prev, size]
-    );
-  };
-
-  const toggleProductType = (type: string) => {
-    setSelectedProductTypes(prev =>
-      prev.includes(type)
-        ? prev.filter(t => t !== type)
-        : [...prev, type]
-    );
-  };
-
-  const filterProducts = (products: Product[]): Product[] => {
+  const filterProducts = useCallback((products: Product[]): Product[] => {
     let filtered = [...products];
 
-    // Filter by price
-    filtered = filtered.filter(
-      product => product.price || 0 >= priceMin && product.price || 0 <= priceMax
-    );
-
-    // Filter by availability
-    if (inStock && !outOfStock) {
-      filtered = filtered.filter(product => !product.selling_fast); // Mock: assume new items are in stock
-    } else if (outOfStock && !inStock) {
-      filtered = filtered.filter(product => product.selling_fast); // Mock logic
-    }
-
-    // Filter by brands
-    if (selectedBrands.length > 0) {
-      // Since we don't have brand in Product type, this is for future expansion
-      // filtered = filtered.filter(product => selectedBrands.includes(product.brand));
-    }
-
-    // Filter by categories (from sidebar)
-    if (selectedCategories.length > 0) {
-      filtered = filtered.filter(product => 
-        selectedCategories.some(cat => product.brand?.toLowerCase().includes(cat.toLowerCase()))
-      );
-    }
-
-    // Filter by active category chips
-    if (activeCategories.length > 0) {
-      // Map category names to category codes
-      const categoryMap: { [key: string]: string[] } = {
-        'Athletic Footwear': ['featured', 'combat'],
-        'Boots for Every Occasion': ['boho', 'classic'],
-        'Luxury Leather Shoes': ['featured', 'bestseller'],
-        'Sandals & Slides': ['toprating'],
-        'Sneakerhead\'s Haven': ['combat', 'featured']
-      };
-      
-      const allowedCategories = activeCategories.flatMap(cat => categoryMap[cat] || []);
-      if (allowedCategories.length > 0) {
-        filtered = filtered.filter(product => 
-          allowedCategories.includes(product.brand || '')
-        );
-      }
-    }
-
-    // Filter by product types
-    if (selectedProductTypes.length > 0) {
+    // Gender
+    if (selectedGenders.length > 0) {
       filtered = filtered.filter(product =>
-        selectedProductTypes.some(type => 
-          product.title?.toLowerCase().includes(type.toLowerCase())
-        )
+        product.gender && selectedGenders.includes(product.gender)
       );
+    }
+
+    // Price — guard against null prices
+    filtered = filtered.filter(product => {
+      const price = product.price ?? 0;
+      return price >= priceMin && price <= priceMax;
+    });
+
+    // Availability flags
+    if (onSale) {
+      filtered = filtered.filter(product => product.on_sale === true);
+    }
+    if (sellingFast) {
+      filtered = filtered.filter(product => product.selling_fast === true);
+    }
+    if (hasMoreColours) {
+      filtered = filtered.filter(product => product.has_more_colours === true);
+    }
+    if (freeDelivery) {
+      filtered = filtered.filter(product =>
+        product.delivery_info?.toLowerCase().includes('free')
+      );
+    }
+
+    // Brand
+    if (selectedBrands.length > 0) {
+      filtered = filtered.filter(product =>
+        product.brand && selectedBrands.includes(product.brand)
+      );
+    }
+
+    // Color — normalise raw color strings to family names before comparing
+    if (selectedColors.length > 0) {
+      filtered = filtered.filter(product => {
+        const normalized = normalizeColor(product.color);
+        return normalized !== null && selectedColors.includes(normalized);
+      });
     }
 
     return filtered;
-  };
+  }, [
+    selectedGenders, priceMin, priceMax,
+    onSale, sellingFast, hasMoreColours, freeDelivery,
+    selectedBrands, selectedColors,
+  ]);
 
-  const clearAllFilters = () => {
-    setActiveCategories([]);
-    setInStock(false);
-    setOutOfStock(false);
+  // ── Clear all ─────────────────────────────────────────────────────────────
+
+  const clearAllFilters = useCallback(() => {
+    setSelectedGenders([]);
+    setOnSale(false);
+    setSellingFast(false);
+    setHasMoreColours(false);
+    setFreeDelivery(false);
     setPriceMin(0);
-    setPriceMax(500);
+    setPriceMax(DEFAULT_PRICE_MAX);
     setSelectedBrands([]);
-    setSelectedCategories([]);
     setSelectedColors([]);
-    setSelectedMaterials([]);
-    setSelectedMoreFilters([]);
-    setSelectedSizes([]);
-    setSelectedProductTypes([]);
-  };
+  }, []);
+
+  // ── Stable context value ──────────────────────────────────────────────────
+
+  const contextValue = useMemo(() => ({
+    selectedGenders,
+    toggleGender,
+    onSale,
+    setOnSale,
+    sellingFast,
+    setSellingFast,
+    hasMoreColours,
+    setHasMoreColours,
+    freeDelivery,
+    setFreeDelivery,
+    priceMin,
+    priceMax,
+    setPriceMin,
+    setPriceMax,
+    selectedBrands,
+    toggleBrand,
+    selectedColors,
+    toggleColor,
+    filterProducts,
+    clearAllFilters,
+  }), [
+    selectedGenders, toggleGender,
+    onSale, sellingFast, hasMoreColours, freeDelivery,
+    priceMin, priceMax,
+    selectedBrands, toggleBrand,
+    selectedColors, toggleColor,
+    filterProducts, clearAllFilters,
+  ]);
 
   return (
-    <FilterContext.Provider
-      value={{
-        activeCategories,
-        toggleCategory,
-        inStock,
-        outOfStock,
-        setInStock,
-        setOutOfStock,
-        priceMin,
-        priceMax,
-        setPriceMin,
-        setPriceMax,
-        selectedBrands,
-        toggleBrand,
-        selectedCategories,
-        toggleCategoryFilter,
-        selectedColors,
-        toggleColor,
-        selectedMaterials,
-        toggleMaterial,
-        selectedMoreFilters,
-        toggleMoreFilter,
-        selectedSizes,
-        toggleSize,
-        selectedProductTypes,
-        toggleProductType,
-        filterProducts,
-        clearAllFilters,
-      }}
-    >
+    <FilterContext.Provider value={contextValue}>
       {children}
     </FilterContext.Provider>
   );

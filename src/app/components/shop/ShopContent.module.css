@@ -204,6 +204,13 @@
     grid-template-columns: 1fr;
   }
 
+  .sidebar {
+    position: absolute;
+    top: 80px;
+    left: -100%;
+    width: 100%;
+  }
+
   .topBar {
     flex-direction: column;
     gap: 15px;
@@ -212,5 +219,50 @@
 
   .section {
     padding: 30px 0;
+  }
+}
+
+/* ── Top-bar right group (sort + view toggle) ────────────────── */
+.topBarRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ── Sort select ─────────────────────────────────────────────── */
+.sortSelect {
+  padding: 8px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 0.88rem;
+  color: #333;
+  background-color: #fff;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.sortSelect:hover,
+.sortSelect:focus {
+  border-color: #999;
+}
+
+/* ── Pagination ellipsis ─────────────────────────────────────── */
+.ellipsis {
+  padding: 10px 6px;
+  color: #999;
+  font-size: 0.9rem;
+  user-select: none;
+}
+
+@media (max-width: 600px) {
+  .topBarRight {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .sortSelect {
+    width: 100%;
   }
 }

@@ -19,7 +19,7 @@ const Header: React.FC = () => {
         <nav className={`${styles.nav} ${mobileMenuOpen ? styles.navOpen : ''}`}>
           <Link href="/" onClick={() => setMobileMenuOpen(false)}>Home</Link>
           <Link href="/shop" onClick={() => setMobileMenuOpen(false)}>Shop</Link>
-          <Link href="/products" onClick={() => setMobileMenuOpen(false)}>Men's shoes</Link>
+          <Link href="/about" onClick={() => setMobileMenuOpen(false)}>About Us</Link>
           <Link href="/blog" onClick={() => setMobileMenuOpen(false)}>Blog</Link>
         </nav>
 

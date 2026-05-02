@@ -1,7 +1,7 @@
 .hero {
   position: relative;
   background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
-              url('/images/blog-hero.jpg');
+              url('/images/hero/bg-blog.jpg');
   background-size: cover;
   background-position: center;
   min-height: 400px;

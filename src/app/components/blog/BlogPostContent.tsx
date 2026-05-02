@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { BlogPost } from '../../types';
 import { blogPosts } from '../../data/mockData';
 import styles from './BlogPostContent.module.css';
+import Image from 'next/image';
 
 interface BlogPostContentProps {
   post: BlogPost;
@@ -59,7 +60,12 @@ const BlogPostContent: React.FC<BlogPostContentProps> = ({ post }) => {
           {/* Main Article */}
           <article className={styles.article}>
             <div className={styles.featuredImage}>
-              <div className={styles.imagePlaceholder}></div>
+              <div className={styles.imagePlaceholder}>
+                <img 
+                  src={post.image} 
+                  alt={post.title} 
+                />
+              </div>
             </div>
 
             <div 

@@ -208,6 +208,7 @@
 @media (max-width: 968px) {
   .hero {
     min-height: 600px;
+    background-size: cover;
   }
 
   .content {
@@ -240,6 +241,7 @@
 @media (max-width: 480px) {
   .hero {
     min-height: 500px;
+    
   }
 
   .title {

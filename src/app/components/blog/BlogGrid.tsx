@@ -33,7 +33,12 @@ const BlogGrid: React.FC = () => {
               {filteredPosts.map((post) => (
                 <article key={post.id} className={styles.blogCard}>
                   <Link href={`/blog/${post.slug}`} className={styles.imageWrapper}>
-                    <div className={styles.imagePlaceholder}></div>
+                    <div className={styles.imagePlaceholder}>
+                      <img 
+                        src={post.image} 
+                        alt={post.title} 
+                      /> 
+                    </div>
                     <div className={styles.categoryBadge}>{post.category}</div>
                   </Link>
                   <div className={styles.cardContent}>

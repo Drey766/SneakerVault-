@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Product } from '@/app/types';
 import { useCart } from '@/app/context/CartContext';
@@ -12,11 +12,25 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const { addToCart } = useCart();
+  const { addToCart, removeFromCart, cart } = useCart();
+  const [isAdded, setIsAdded] = useState(false);
+  const isInBasket = cart.some(item => item.id === product.id);
+    useEffect(() => {
+        if(isInBasket) {
+        setIsAdded(true)
+        } else {
+        setIsAdded(false)
+        }
+    }, [isInBasket])
+  
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
+    if(isInBasket) {
+      removeFromCart(product.id)
+    } else{
     addToCart(product);
+    }
   };
 
   return (
@@ -35,7 +49,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </div>
         <div className={styles.overlay}>
           <button onClick={handleAddToCart} className={styles.addToCartBtn}>
-            ADD TO CART
+            {isAdded ? 'Added' : 'Add to Cart'}
           </button>
         </div>
       </Link>
